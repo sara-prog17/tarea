@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src=" {% static 'js/bootstrap.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+        
+        <div class="container-fluid">
+            <h1>Lista</h1>
+            <table class="table table-bordered border-primary">
+    
+                <thead>
+                    <tr>
+                        <th>cliente</th>
+                        <th>n_pedido</th>
+                        <th>productos</th>
+                        <th>valor_producto</th>
+                        <th>producto_mas_transporte </th>
+                        <th>tamaño_producto</th>
+                        <th>incremento</th>
+                        <th>proveedor</th>
+                        <th>cantidad_productos</th>
+                        <th>tiempo_entrega</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    {% for c in  pedido %}
+                    <tr>
+                        <td>{{c.cliente}}</td>
+                        <td>{{c.n_pedido}}</td>
+                        <td>{{c.productos}}</td>
+                        <td>{{c.valor_producto}}</td>
+                        <td>{{c.producto_mas_transporte}}</td>
+                        <td>{{c.tamaño_producto}}</td>
+                        <td>{{c.incremento}}</td>
+                        <td>{{c.proveedor}}</td>
+                        <td>{{c.cantidad_productos}}</td>
+                        <td>{{c.tiempo_entrega}}</td>
+                        <td><a href="{% url 'ActualizarPedido' id=c.n_pedido %}"><button class="btn btn-success btn-sm">Actualizar</button></a></td>
+                        <td><a onclick = "borrar('{{c.n_pedido}}')"><button class="btn btn-info btn-sm">Eliminar</button></a></td>
+                        
+                    </tr>   
+                    <a href="{% url 'index' %}" class="btn btn-secondary">Atras</a>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+        <script>
+            function borrar(id){
+                swal({
+                    title : 'Esta seguro que desea borrar ?',
+                    text : 'Si lo borras no podras recuperarlo',
+                    icon : 'warning',
+                    buttons : true ,
+                    dangerMode : true ,
+                })
+                .then ((willDelete)=>{
+                    if (willDelete){
+                        location.href = "/eliminarCliente/"+id
+                    }
+                    else{
+                        swal ('No se borro el registro')
+                    }
+                });
+            }
+        </script> 
+    </body>   
+</html>

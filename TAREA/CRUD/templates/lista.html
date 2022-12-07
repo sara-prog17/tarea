@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src=" {% static 'js/bootstrap.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+        
+        <div class="container-fluid">
+            <h1>Lista</h1>
+            <table class="table table-bordered border-primary">
+    
+                <thead>
+                    <tr>
+                        <th>nombre</th>
+                        <th>apellido</th>
+                        <th>f_nacimiento</th>
+                        <th>f_exp_documento</th>
+                        <th>documento</th>
+                        <th>edad</th>
+                        <th>genero</th>
+                        <th>l_exp_documento</th>
+                        <th>ciud_residencia</th>
+                        <th>celular</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    {% for c in cliente %}
+                    <tr>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.apellido}}</td>
+                        <td>{{c.f_nacimiento}}</td>
+                        <td>{{c.f_exp_documento}}</td>
+                        <td>{{c.documento}}</td>
+                        <td>{{c.edad}}</td>
+                        <td>{{c.genero}}</td>
+                        <td>{{c.l_exp_documento}}</td>
+                        <td>{{c.ciud_residencia}}</td>
+                        <td>{{c.celular}}</td>
+                        <td><a href="{% url 'ActualizarCliente' id=c.id %}"><button class="btn btn-success btn-sm">Actualizar</button></a></td>
+                        <td><a onclick = "borrar('{{c.id}}')"><button class="btn btn-info btn-sm">Eliminar</button></a></td>
+                    </tr> 
+                    <a href="{% url 'index' %}" class="btn btn-secondary">Atras</a>
+                    {% endfor %}
+                          
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function borrar(id){
+                swal({
+                    title : 'Esta seguro que desea borrar ?',
+                    text : 'Si lo borras no podras recuperarlo',
+                    icon : 'warning',
+                    buttons : true ,
+                    dangerMode : true ,
+                })
+                .then ((willDelete)=>{
+                    if (willDelete){
+                        location.href = "/eliminarCliente/"+id
+                    }
+                    else{
+                        swal ('No se borro el registro')
+                    }
+                });
+            }
+        </script> 
+    </body>           
+</html>

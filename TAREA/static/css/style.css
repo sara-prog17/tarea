@@ -1,0 +1,47 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.container{
+    display: flex;
+    width: 95vw;
+    height: 95vh;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.container form input{
+    width: 35vw;
+}
+
+.boton{
+    width: 15vw ;
+}
+
+h1 {
+    text-align: center;
+    justify-content: center;
+    align-content: flex-start;
+    
+
+}
+
+h2{
+    text-align: center;
+    justify-content: center;
+    align-content: flex-start;
+    margin-top: 20%;
+}
+.container-flex{
+    text-align: center;
+    justify-content: center;
+    align-content: flex-start;
+}
+.container-flex div a{
+    text-align: center;
+    justify-content: center;
+    align-content: flex-start;
+    background:aquamarine;
+    margin: 5%;
+    padding: 2%;
+}
